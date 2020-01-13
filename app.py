@@ -25,6 +25,7 @@ class myHandler(BaseHTTPRequestHandler):
 	def do_GET(self):
 		path=self.path
 		print(self.path)
+		print('estoy aqui')
 		if self.path=="/":  #127.0.0.1:5000/
 			self.path="/index.html" #127.0.0.1:5000/index.html
 		try:
