@@ -4,7 +4,7 @@ try:
 	from BaseHTTPServer import BaseHTTPRequestHandler,HTTPServer
 except:
 	from http.server import BaseHTTPRequestHandler,HTTPServer
-from os import curdir, sep
+from os import curdir, sep 
 try:
 	from urlparse import urlparse
 	from urlparse import urlparse, parse_qs
