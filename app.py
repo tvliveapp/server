@@ -1,5 +1,5 @@
 #!/usr/bin/python
-
+ 
 try:
 	from BaseHTTPServer import BaseHTTPRequestHandler,HTTPServer
 except:
