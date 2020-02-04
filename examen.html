@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <body>
 <h2>Nombre</h2>
 <input type="text" id="nombre"><br>
@@ -19,6 +20,7 @@
   
 </select>
 <button type="button" onclick="reservar()">enviar</button>
+<p>Al presionar enviar un cuadro de dialogo le pedira confirmacion, presione OK si esta segur@ de la informacion, caso contrario presione cancelar. Una vez realizada la operacion no es posible cambiar. Verifique el dia y la hora programada. Si se encuentra en un puesto superior a 2 es posible que no alcance a dar la prueba en ese horario y depende de la disponibilidad</p>
 <script src="emb.js">
 </script>
 <script>
@@ -40,7 +42,7 @@ function reservar(){
 		date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 		var r = confirm("PROGRAMAR EXAMEN\nNombre: "+nombre+"\nmateria: "+mat+'\ndia: '+dia+'\nhora: '+hora+'\npuesto: '+turno);
 		  if (r == true) {
-			myImage.src = '?'+materia+';'+dia+';'+hora+';'+nombre+':'+date+':'+today.getHours() + "-" + today.getMinutes() + "-" + today.getSeconds();
+			myImage.src = '?'+materia+';'+dia+';'+hora+';'+nombre+':'+date+':'+today.getHours() + "-" + today.getMinutes() + "-" + today.getSeconds()+':'+myIP;
 			document.location.reload(true)
 		  } else {
 			
@@ -51,6 +53,7 @@ function reservar(){
 
 function myFunction1(){
 	materia=document.getElementById('materia').value;
+	
 	dia=document.getElementById('dia').value;
 	hora=document.getElementById('hora');
 	hora.innerHTML='';
@@ -67,7 +70,7 @@ function myFunction1(){
 
 function myFunction(){
 	materias.innerHTML="";
-	for(key in citas){
+	//for(key in citas){
 		
 		for (i in citas[	document.getElementById('materia').value]){
 			var option = document.createElement("option");
@@ -77,12 +80,22 @@ function myFunction(){
 			
 		}
 		
-	}
+	//}
 	myFunction1();
 }
 myFunction();
-</script> ;
+</script> 
 
+
+<script type="application/javascript">
+  var myIP;
+  function getIP(json) {
+   myIP=json.ip;
+  }
 </script>
+
+<script type="application/javascript" src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
+
+
 </body>
 </html>
