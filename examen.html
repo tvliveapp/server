@@ -43,13 +43,17 @@ function reservar(){
 		war='';
 		if (turno>2)
 			war='  !es posible que alcances a ar la prueba!'
-		var r = confirm("PROGRAMAR EXAMEN\nNombre: "+nombre+"\nmateria: "+mat+'\ndia: '+dia+'\nhora: '+hora+'\npuesto: '+turno+' '+war+'\nhora ingreso: '+date+':'+today.getHours() + "-" + today.getMinutes() + "-" + today.getSeconds());
-		  if (r == true) {
-			myImage.src = '?'+materia+';'+dia+';'+hora+';'+nombre+':'+date+':'+today.getHours() + "-" + today.getMinutes() + "-" + today.getSeconds()+':'+myIP;
-			document.location.reload(true)
-		  } else {
-			
-		  }
+		if (turno>3)
+			alert('no se puede programar mas de 4');
+		else{
+			var r = confirm("PROGRAMAR EXAMEN\nNombre: "+nombre+"\nmateria: "+mat+'\ndia: '+dia+'\nhora: '+hora+'\npuesto: '+turno+' '+war+'\nhora ingreso: '+date+':'+today.getHours() + "-" + today.getMinutes() + "-" + today.getSeconds());
+			  if (r == true) {
+				myImage.src = '?'+materia+';'+dia+';'+hora+';'+nombre+':'+date+':'+today.getHours() + "-" + today.getMinutes() + "-" + today.getSeconds()+':'+myIP;
+				document.location.reload(true)
+			  } else {
+				
+			  }
+		}
 	}
 
 }
