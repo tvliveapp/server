@@ -1,10 +1,10 @@
 #!/usr/bin/python
-  
+
 try:
 	from BaseHTTPServer import BaseHTTPRequestHandler,HTTPServer
 except:
 	from http.server import BaseHTTPRequestHandler,HTTPServer
-from os import curdir, sep 
+from os import curdir, sep
 try:
 	from urlparse import urlparse
 	from urlparse import urlparse, parse_qs
@@ -16,18 +16,33 @@ port = int(os.environ.get("PORT", 5000))
 PORT_NUMBER = port
 
 
+#de leo borrar
+import citas
 
-#This class will handles any incoming request from
-#the browser 
+citas=citas.citas
+
+####
+
 class myHandler(BaseHTTPRequestHandler):
-	
+	global citas
 	#Handler for the GET requests
 	def do_GET(self):
-		path=self.path
-		print(self.path)
-		print('estoy aqui')
+		self.path=self.path.split('?')
+		try:
+			arg=self.path[1].replace('%20',' ')
+			print(arg)
+			arg=arg.split(';')
+			citas[arg[0]][arg[1]][arg[2]].append(arg[3])
+			print(citas[arg[0]])
+		except:
+			pass
+		self.path=self.path[0]
+		
+		
+			
 		if self.path=="/":  #127.0.0.1:5000/
 			self.path="/index.html" #127.0.0.1:5000/index.html
+		print()
 		try:
 			#Check the file extension required and
 			#set the right mime type
@@ -36,6 +51,9 @@ class myHandler(BaseHTTPRequestHandler):
 			if self.path.endswith(".html"):
 				mimetype='text/html'
 				sendReply = True
+				f = open(curdir + sep + self.path)
+				data=f.read()
+				f.close()
 			if self.path.endswith(".jpg"):
 				mimetype='image/jpg'
 				sendReply = True
@@ -43,7 +61,10 @@ class myHandler(BaseHTTPRequestHandler):
 				mimetype='image/gif'
 				sendReply = True
 			if self.path.endswith(".js"):
+				
 				mimetype='application/javascript'
+				
+				data='citas='+str(citas)
 				sendReply = True
 			if self.path.endswith(".css"):
 				mimetype='text/css'
@@ -51,15 +72,16 @@ class myHandler(BaseHTTPRequestHandler):
 
 			if sendReply == True:
 				#Open the static file requested and send it
-				#f = open(curdir + sep + self.path,'r') 
+				#f = open(curdir + sep + self.path) 
 				self.send_response(200)
 				self.send_header('Content-type',mimetype)
 				self.end_headers()
+				#data=f.read()
 				
 				try:
-					self.wfile.write('hola mundo')
+					self.wfile.write(data)
 				except:
-					self.wfile.write(bytes('hola mundo', 'UTF-8'))
+					self.wfile.write(bytes(data, 'UTF-8'))
 				
 			return
 

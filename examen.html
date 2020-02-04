@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>Nombre</h2>
+<input type="text" id="nombre"><br>
+<h2>Materia</h2>
+<select id='materia'onchange="myFunction()">
+  <option value="emb">Embebidos</option>
+  <option value="sda">Sistemas Digitales A.</option>
+  <option value="mcu">Microprocesadores</option>
+ 
+</select>
+<h2>dia</h2>
+ <select id='dia' onchange="myFunction1()" >
+  
+</select>
+<h2>hora</h2>
+<select id='hora' >
+  
+</select>
+<button type="button" onclick="reservar()">enviar</button>
+<script src="emb.js">
+</script>
+<script>
+var today = new Date();
+materias=document.getElementById("dia");
+var dict={'emb':'Embebidos','sda':'Sistemas Digitales A','mcu':'Microprocesadores'}
+function reservar(){
+	var myImage = new Image(100, 200);
+	//myImage.onload='location.reload()';
+	mat=dict[document.getElementById('materia').value];
+	materia=document.getElementById('materia').value;
+	dia=document.getElementById('dia').value;
+	hora=document.getElementById('hora').value;
+	nombre=document.getElementById('nombre').value;
+	if (nombre=='' || nombre.split(' ').length<2)
+		alert('por favor ingresar el nombre y apellido');
+	else{
+		turno=parseInt(citas[materia][dia][hora].length)+1;
+		date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+		var r = confirm("PROGRAMAR EXAMEN\nNombre: "+nombre+"\nmateria: "+mat+'\ndia: '+dia+'\nhora: '+hora+'\npuesto: '+turno);
+		  if (r == true) {
+			myImage.src = '?'+materia+';'+dia+';'+hora+';'+nombre+':'+date+':'+today.getHours() + "-" + today.getMinutes() + "-" + today.getSeconds();
+			document.location.reload(true)
+		  } else {
+			
+		  }
+	}
+
+}
+
+function myFunction1(){
+	materia=document.getElementById('materia').value;
+	dia=document.getElementById('dia').value;
+	hora=document.getElementById('hora');
+	hora.innerHTML='';
+	for(key in citas[materia][dia]){
+		
+		
+		var option = document.createElement("option");
+		option.value=key;
+		option.innerHTML=key;
+		hora.appendChild(option);
+		
+	}
+}
+
+function myFunction(){
+	materias.innerHTML="";
+	for(key in citas){
+		
+		for (i in citas[	document.getElementById('materia').value]){
+			var option = document.createElement("option");
+			option.value=i;
+			option.innerHTML=i;
+			materias.appendChild(option);
+			
+		}
+		
+	}
+	myFunction1();
+}
+myFunction();
+</script> ;
+
+</script>
+</body>
+</html>
