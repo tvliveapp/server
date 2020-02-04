@@ -34,6 +34,9 @@ class myHandler(BaseHTTPRequestHandler):
 			arg=arg.split(';')
 			citas[arg[0]][arg[1]][arg[2]].append(arg[3])
 			print(citas[arg[0]])
+			f=open('citas.py','w')
+			f.write('citas='+str(citas))
+			f.close()
 		except:
 			pass
 		self.path=self.path[0]
