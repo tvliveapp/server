@@ -49,9 +49,10 @@ function reservar(){
 			var r = confirm("PROGRAMAR EXAMEN\nNombre: "+nombre+"\nmateria: "+mat+'\ndia: '+dia+'\nhora: '+hora+'\npuesto: '+turno+' '+war+'\nhora ingreso: '+date+':'+today.getHours() + "-" + today.getMinutes() + "-" + today.getSeconds());
 			  if (r == true) {
 				myImage.src = '?'+materia+';'+dia+';'+hora+';'+nombre+':'+date+':'+today.getHours() + "-" + today.getMinutes() + "-" + today.getSeconds()+':'+myIP;
+				alert('la prueba se ha programado correctamente');
 				document.location.reload(true)
 			  } else {
-				
+				alert('su prueba no se ha programado');
 			  }
 		}
 	}
