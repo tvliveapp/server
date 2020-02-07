@@ -68,6 +68,9 @@ class myHandler(BaseHTTPRequestHandler):
 				mimetype='application/javascript'
 				
 				data='citas='+str(citas)
+				f=open('citas.py','r')
+				data=f.read()
+				f.close()
 				sendReply = True
 			if self.path.endswith(".css"):
 				mimetype='text/css'
