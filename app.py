@@ -20,7 +20,9 @@ PORT_NUMBER = port
 import citas
 
 citas=citas.citas
-
+f=open('citas.py','w')
+f.write('citas='+str(citas))
+f.close()
 ####
 
 class myHandler(BaseHTTPRequestHandler):
